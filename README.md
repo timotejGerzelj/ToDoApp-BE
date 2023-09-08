@@ -23,8 +23,9 @@ You will need:
 
 ### Running the Application
 Apply the migrations already given:
-1. Run `dotnet restore`
-2. Add appsetting.json in your root folder and add `{
+1. `cd ToDoApp-BE`
+2. Run `dotnet restore`
+3. Add appsetting.json in your root folder and add `{
     "Logging": {
       "LogLevel": {
         "Default": "Information",
@@ -36,7 +37,7 @@ Apply the migrations already given:
     },
     "AllowedHosts": "*"
   }`
-2. Run `dotnet run`
+4. Run `dotnet run`
 
 #### How to Run the Application
 Explain how users can run your application, including any configuration or command-line instructions. Provide examples if possible.
