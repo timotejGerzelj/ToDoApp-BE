@@ -27,8 +27,8 @@ namespace ToDoApp.Tests.Controller
                         Id = i,
                         Naslov = $"Task {i}",
                         Opis = $"Description {i}",
-                        DatumUstvarjanja = DateTime.Now, // You may set this to a specific date
-                        Opravljeno = i % 2 == 0 // This alternates true and false
+                        DatumUstvarjanja = DateTime.Now, 
+                        Opravljeno = i % 2 == 0 
                     }
                     );
                     await databaseContext.SaveChangesAsync();
@@ -81,8 +81,6 @@ public async Task TaskController_UpdateTask_UpdatesTask()
     var dbContext = await GetDatabaseContext();
     var taskController = new TaskController(dbContext);
     var taskIdToUpdate = 1;
-
-    // Create a modified task with the same ID
     var modifiedTask = new TodoTasks
     {
         Id = taskIdToUpdate,
@@ -98,7 +96,6 @@ public async Task TaskController_UpdateTask_UpdatesTask()
     // Assert
     result.Should().BeOfType<NoContentResult>();
 
-    // Retrieve the updated task from the database
     var updatedTask = await dbContext.Tasks.FindAsync(taskIdToUpdate);
     updatedTask.Should().NotBeNull();
     updatedTask.Naslov.Should().Be("Modified Task");
@@ -120,7 +117,6 @@ public async Task TaskController_DeleteTask_DeletesTask()
     // Assert
     result.Should().BeOfType<NoContentResult>();
 
-    // Verify that the task with the specified ID is deleted from the database
     var deletedTask = await dbContext.Tasks.FindAsync(taskIdToDelete);
     deletedTask.Should().BeNull();
     }
@@ -131,7 +127,7 @@ public async Task TaskController_DeleteTask_DeletesTask()
     // Arrange
     var dbContext = await GetDatabaseContext();
     var taskController = new TaskController(dbContext);
-    var taskIdToDelete = 999; // Non-existent ID
+    var taskIdToDelete = 999;
 
     // Act
     var result = await taskController.DeleteTask(taskIdToDelete);
@@ -148,7 +144,6 @@ public async Task TaskController_DeleteTask_DeletesTask()
 
             using (var dbContext = new AppDbContext(options))
             {
-                // Add a task with Opravljeno set to false
                 var task = new TodoTasks { Id = 1, Naslov = "Test Task", Opis = "Description", Opravljeno = false };
                 dbContext.Tasks.Add(task);
                 dbContext.SaveChanges();

@@ -5,22 +5,8 @@ using FluentAssertions;
 using ToDoApp.Controllers;
 
 using ToDoApp.Interfaces;
-using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using Xunit;
-using ToDoApp.Data;
-using ToDoApp.Repository;
-
 
 namespace ToDoApp.Tests.Controller {
-        // Arange - Go get your variables, classes functions etc.
-
-        // Act - Execute the function 
-
-        // Assert - Whatever is returned is it what you want
-    
     public class TaskControllerTests
     {   private readonly ITaskRepository _taskRepositories;
         public TaskControllerTests() { 
@@ -29,8 +15,6 @@ namespace ToDoApp.Tests.Controller {
      [Fact]
         public void TaskController_CreateTask_ReturnOK()
         {
-
-            //Arrange
             var pokemon = new Models.Task{
                 Naslov = "Sample Task",
                 Opis = "This is a sample task description.",
@@ -41,9 +25,6 @@ namespace ToDoApp.Tests.Controller {
             var controller = new TaskController(_taskRepositories);
             var result = controller.CreateTask(pokemon);
             result.Should().NotBeNull();
-
-        // Set properties as needed
-        // For example: Id = 3, Naslov = "SomeTitle", Opis = "SomeDescription", ...
     }
         [Fact]
         public void TaskController_GetTasks_ReturnOK()
@@ -62,7 +43,7 @@ namespace ToDoApp.Tests.Controller {
         public void TaskController_DeleteTask_ReturnNoContent()
         {
             // Arrange
-            var taskId = 1; // Replace with the ID of the task to delete
+            var taskId = 1;
             A.CallTo(() => _taskRepositories.TaskExists(taskId)).Returns(true);
             A.CallTo(() => _taskRepositories.DeleteTask(taskId)).Returns(true);
             var controller = new TaskController(_taskRepositories);
@@ -78,7 +59,7 @@ namespace ToDoApp.Tests.Controller {
         public void TaskController_UpdateTask_ReturnNoContent()
         {
             // Arrange
-            var taskId = 1; // Replace with the ID of the task to update
+            var taskId = 1;
             var updatedTask = new Models.Task
             {
                 Id = taskId,
@@ -102,7 +83,7 @@ namespace ToDoApp.Tests.Controller {
         public async void TaskController_GetTaskById_ReturnOK()
         {
             // Arrange
-            var taskId = 1; // Replace with the ID of the task to retrieve
+            var taskId = 1; 
             var expectedTask = new Models.Task
             {
                 Id = taskId,

@@ -15,10 +15,10 @@ namespace ToDoApp.Controllers
             _context = context;
         }
 
-        // GET: api/Task
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<TodoTasks>))]
-        public ActionResult<IEnumerable<TodoTasks>> GetTasks()
+// GET: api/Task
+[HttpGet]
+[ProducesResponseType(200, Type = typeof(IEnumerable<TodoTasks>))]
+public ActionResult<IEnumerable<TodoTasks>> GetTasks()
         {
             var tasks = _context.Tasks.ToList();
             if (!ModelState.IsValid)
@@ -115,7 +115,7 @@ public async Task<IActionResult> UpdateTask(int id, TodoTasks task)
             await _context.SaveChangesAsync();
             return NoContent();
     }
-
+// PUT: api/Task/opravljeno/5
 [HttpPut("opravljeno/{id}")]
 [ProducesResponseType(400)]
 [ProducesResponseType(204)]
@@ -133,7 +133,7 @@ public async Task<IActionResult> TaskUpdateOpravljeno(int id, TodoTasks task)
                     return NotFound();
                 }
 
-                existingTask.Opravljeno = true; // Update only the Opravljeno field
+                existingTask.Opravljeno = true; 
                 await _context.SaveChangesAsync();
 
                 return NoContent();

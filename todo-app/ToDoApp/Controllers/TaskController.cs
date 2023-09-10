@@ -41,13 +41,12 @@ namespace ToDoApp.Controllers
 
         [HttpGet("{taskId}")]
         [ProducesResponseType(200, Type = typeof(Task))]
-        [ProducesResponseType(200, Type = typeof(Task))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetTaskById(int taskId){
             var task = await _taskRepository.GetTaskById(taskId);
 
             if (task == null)
-                return NotFound(); // Return a 404 response if the task is not found.
+                return NotFound(); 
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -76,7 +75,7 @@ namespace ToDoApp.Controllers
             }
             return NoContent();
         }
-
+        // UPDATE: api/Task/5
         [HttpPut("{taskId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
@@ -97,6 +96,7 @@ namespace ToDoApp.Controllers
             }
             return NoContent();
         }
+        // UPDATE: api/Task/opravljeno/5
         [HttpPut("opravljeno/{taskId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
